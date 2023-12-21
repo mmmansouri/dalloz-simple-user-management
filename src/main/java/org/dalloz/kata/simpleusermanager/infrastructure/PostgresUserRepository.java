@@ -25,6 +25,11 @@ public class PostgresUserRepository implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByEmail(String email) {
+        return this.userRepository.findByEmail(email).map(UserEntity::toUser);
+    }
+
+    @Override
     public List<User> findAll() {
         return userRepository.findAll()
                 .stream()
@@ -33,8 +38,8 @@ public class PostgresUserRepository implements UserRepository {
     }
 
     @Override
-    public UUID save(User user) {
-        return userRepository.save(new UserEntity(user)).getId();
+    public User save(User user) {
+        return userRepository.save(new UserEntity(user)).toUser();
     }
 
     @Override

@@ -15,7 +15,7 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
   db:
-    image: 'postgres:13.1-alpine'
+    image: 'postgres:15-alpine'
     container_name: users-db
     environment:
       - POSTGRES_USER=momo-postgres
