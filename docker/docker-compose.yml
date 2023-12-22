@@ -1,23 +1,27 @@
-version: '2'
+version: '3.9'
 
 services:
-  app:
+  user-management-app:
     image: 'docker-spring-boot-postgres:latest'
     build:
       context: .
     container_name: simple-user-manager
     depends_on:
-      - db
+      - user-management-db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/users-db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-management-db:5432/users-db
       - SPRING_DATASOURCE_USERNAME=momo-postgres
       - SPRING_DATASOURCE_PASSWORD=momo-postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - 8080:8080
 
-  db:
+  user-management-db:
     image: 'postgres:15-alpine'
     container_name: users-db
     environment:
       - POSTGRES_USER=momo-postgres
       - POSTGRES_PASSWORD=momo-postgres
       - POSTGRES_DB=users-db
+    ports:
+      - 5432:5432
