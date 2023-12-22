@@ -41,7 +41,7 @@ public class SpringRestUserController {
         return new UserWebDto(userService.save(userWebDto.toUser()));
     }
 
-    @DeleteMapping(value = "/{id}", produces ="application/json" )
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable UUID id) {
         userService.delete(id);
     }
